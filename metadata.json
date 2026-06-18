@@ -1,0 +1,10 @@
+{
+  "name": "Happy Birthday Sister",
+  "description": "An elegant birthday celebration dashboard for sister with a virtual cake, memories, letter, and nice music.",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
