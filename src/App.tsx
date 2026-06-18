@@ -163,6 +163,30 @@ export default function App() {
             </div>
 
             {/* Progressive Story Nav Bar / Timeline tracker at the bottom */}
+            {activeSection !== null && (
+              <motion.div
+                key={activeSection}
+                initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                className="fixed bottom-20 left-1/2 -translate-x-1/2 z-40 bg-[#160a26]/90 backdrop-blur-lg border border-pink-500/30 rounded-full px-5 py-2.5 flex items-center gap-2.5 max-w-[90vw] w-max shadow-[0_8px_32px_rgba(244,63,94,0.15)] select-none text-white text-center"
+              >
+                <span className="text-xs animate-bounce">💡</span>
+                <p className="text-[10px] sm:text-[11px] font-sans font-black text-pink-200 tracking-tight leading-none text-center">
+                  {[
+                    "Welcome Pinku! 🎵 Play the Birthday Chime (top-left) & scroll down for the surprise!",
+                    "Cut/Slide the Birthday Cake, blow the candles, and let's get partying! 🎂",
+                    "Flip the roasted cards 😜 to read customized sweet sibling roasts!",
+                    "Tap on the memories below to load and stream gorgeous photos & videos! 📸",
+                    "Double tap anywhere on the wall to send floating balloon wishes! 🎈",
+                    "Read the beautifully decorated letter from your mendak brother 💖",
+                    "Press Play to listen to the special voice tape recorded for you! 🎙️",
+                    "Let's click here to capture this beautiful birthday smile forever! 👑"
+                  ][activeSection] || "Scroll down to see the magic! ✨"}
+                </p>
+              </motion.div>
+            )}
+
             <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 flex items-center justify-center gap-1 bg-white/30 backdrop-blur-md rounded-full px-4 py-2.5 border border-white/40 shadow-xl select-none max-w-xs sm:max-w-md">
               <span className="text-[10px] font-mono font-bold text-pink-700/80 mr-2">UNBOXING STEPS:</span>
               <div className="flex gap-2">

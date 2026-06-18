@@ -305,20 +305,21 @@ export default function MemoryGallery({}: MemoryGalleryProps) {
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 15 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-white p-4 pb-6 rounded-2xl shadow-2xl max-w-xs sm:max-w-md w-full flex flex-col items-center relative cursor-default border border-slate-150"
+              className="bg-white p-3 pb-5 rounded-2xl shadow-2xl max-w-[340px] sm:max-w-[420px] w-full flex flex-col items-center relative cursor-default border border-slate-150"
             >
-              {/* Media viewer */}
-              <div className="w-full aspect-[4/5] bg-black rounded-xl overflow-hidden relative mb-4 shadow-inner flex flex-col items-center justify-center">
+              {/* Media viewer with dynamic responsive bounds so it NEVER cuts off or overflows */}
+              <div className="w-full h-[42vh] max-h-[340px] bg-neutral-950 rounded-xl overflow-hidden relative mb-3.5 shadow-inner flex flex-col items-center justify-center">
                 {paginatedItems[activePhotoIdx].videoUrl ? (
                   <div className="w-full h-full relative flex flex-col items-center justify-center">
                     <video
                       src={paginatedItems[activePhotoIdx].videoUrl}
                       controls
                       autoPlay
+                      muted
                       playsInline
+                      loop
                       referrerPolicy="no-referrer"
-                      crossOrigin="anonymous"
-                      className="w-full h-full object-contain select-none"
+                      className="w-full h-full object-contain select-none bg-black"
                     />
                   </div>
                 ) : (
@@ -326,34 +327,34 @@ export default function MemoryGallery({}: MemoryGalleryProps) {
                     src={paginatedItems[activePhotoIdx].hdUrl} 
                     alt="High resolution memory" 
                     referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover select-none animate-fade-in" 
+                    className="w-full h-full object-contain select-none animate-fade-in bg-black" 
                   />
                 )}
               </div>
 
               {/* Caption info & Fail-safe Direct Player Button for Videos */}
-              <div className="flex flex-col items-center gap-1.5 w-full bg-slate-50 py-3 px-4 rounded-xl border border-slate-100">
-                <p className="text-slate-800 text-xs sm:text-sm font-black italic font-sans text-center leading-relaxed">
+              <div className="flex flex-col items-center gap-1.5 w-full bg-slate-50 py-2.5 px-3.5 rounded-xl border border-slate-100">
+                <p className="text-slate-800 text-xs sm:text-sm font-black italic font-sans text-center leading-normal">
                   {paginatedItems[activePhotoIdx].caption}
                 </p>
                 
                 {paginatedItems[activePhotoIdx].videoUrl && (
-                  <div className="w-full mt-2 pt-2 border-t border-slate-200/60 flex flex-col items-center">
-                    <span className="text-[9px] text-slate-500 font-mono text-center leading-tight mb-2">
-                      If browser blocks the video frame from playing here:
+                  <div className="w-full mt-1.5 pt-1.5 border-t border-slate-200/60 flex flex-col items-center">
+                    <span className="text-[9px] text-pink-600 font-extrabold font-mono text-center leading-tight mb-1.5 animate-pulse">
+                      🔊 Tap video volume controls to hear the audio!
                     </span>
                     <a
                       href={paginatedItems[activePhotoIdx].videoUrl || undefined}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-gradient-to-r from-pink-500 to-rose-500 hover:brightness-110 active:scale-95 text-white text-[10px] font-extrabold uppercase tracking-widest rounded-lg shadow-sm transition-all"
+                      className="inline-flex items-center gap-1.5 px-4.5 py-1.5 bg-gradient-to-r from-pink-500 to-rose-500 hover:brightness-110 active:scale-95 text-white text-[9px] font-black uppercase tracking-wider rounded-lg shadow-sm transition-all"
                     >
-                      <Play size={10} fill="white" /> Play in Native Player Tab ↗
+                      <Play size={9} fill="white" /> Open Native Player Link ↗
                     </a>
                   </div>
                 )}
                 
-                <span className="text-[9px] font-mono font-bold tracking-widest text-pink-500 uppercase text-center mt-1">
+                <span className="text-[9px] font-mono font-black tracking-widest text-pink-500 uppercase text-center mt-0.5">
                   💖 sweet sibling connection 💖
                 </span>
               </div>
