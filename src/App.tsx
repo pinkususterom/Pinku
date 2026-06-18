@@ -24,7 +24,7 @@ import FinalSurprise from './components/FinalSurprise';
 export default function App() {
   const [unlocked, setUnlocked] = useState(false);
   const [customPhotos, setCustomPhotos] = useState<StoredPhoto[]>([]);
-  const [sisterName, setSisterName] = useState('Moti Rani 👑');
+  const [sisterName, setSisterName] = useState('Pinku Bahan 👑');
   const [cakeCut, setCakeCut] = useState(false);
   
   // Customizer Panel State
@@ -41,7 +41,7 @@ export default function App() {
       const photos = await getPhotos();
       setCustomPhotos(photos);
       
-      const savedName = await getSetting<string>('sister_name', 'Moti Rani 👑');
+      const savedName = await getSetting<string>('sister_name', 'Pinku Bahan 👑');
       setSisterName(savedName);
       setInputName(savedName);
     }

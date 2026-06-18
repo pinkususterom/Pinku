@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import { DEFAULT_PHOTOS } from '../utils/defaultImages';
+import STATIC_PHOTOS_JSON from '../utils/photos.json';
 
 interface HeroSectionProps {
   customPhotos?: any[];
@@ -16,9 +17,16 @@ export default function HeroSection({ sisterName }: HeroSectionProps) {
       .then(d => {
         if (d.photos && Array.isArray(d.photos) && d.photos.length > 0) {
           setPhotos(d.photos.map((p: any) => p.baseUrl));
+        } else if (STATIC_PHOTOS_JSON && Array.isArray(STATIC_PHOTOS_JSON.photos) && STATIC_PHOTOS_JSON.photos.length > 0) {
+          setPhotos(STATIC_PHOTOS_JSON.photos.map((p: any) => p.baseUrl));
         }
       })
-      .catch(err => console.error('Error fetching hero photos:', err));
+      .catch(err => {
+        console.error('Error fetching hero photos:', err);
+        if (STATIC_PHOTOS_JSON && Array.isArray(STATIC_PHOTOS_JSON.photos) && STATIC_PHOTOS_JSON.photos.length > 0) {
+          setPhotos(STATIC_PHOTOS_JSON.photos.map((p: any) => p.baseUrl));
+        }
+      });
   }, []);
 
   // Merge scraped photos with defaults if not loaded yet

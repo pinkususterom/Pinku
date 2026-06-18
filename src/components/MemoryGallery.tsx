@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronLeft, ChevronRight, X, Play, Sparkles, ShieldAlert, Video } from 'lucide-react';
 import { DEFAULT_PHOTOS } from '../utils/defaultImages';
+import STATIC_PHOTOS_JSON from '../utils/photos.json';
 
 interface MemoryGalleryProps {
   // Ignored now that custom upload is removed to preserve clean client album
@@ -64,6 +65,16 @@ export default function MemoryGallery({}: MemoryGalleryProps) {
         id: `google_${idx}`,
         url: `${item.baseUrl}=w350-h350-c`,     // Native center-crop thumbnail size
         hdUrl: `${item.baseUrl}=w900`,          // Crisp detail size
+        caption: `Lovely Sister Memory #${idx + 1} ✨`,
+        isCustom: false,
+        videoUrl: item.videoUrl
+      }));
+    } else if (STATIC_PHOTOS_JSON && Array.isArray(STATIC_PHOTOS_JSON.photos) && STATIC_PHOTOS_JSON.photos.length > 0) {
+      // Pre-scraped static photos from build time
+      return STATIC_PHOTOS_JSON.photos.map((item, idx) => ({
+        id: `static_google_${idx}`,
+        url: `${item.baseUrl}=w350-h350-c`,
+        hdUrl: `${item.baseUrl}=w900`,
         caption: `Lovely Sister Memory #${idx + 1} ✨`,
         isCustom: false,
         videoUrl: item.videoUrl
@@ -146,11 +157,11 @@ export default function MemoryGallery({}: MemoryGalleryProps) {
 
           {/* Album parse error fallback banner */}
           {albumError && !isLoadingAlbum && (
-            <div className="w-full max-w-md p-4 mb-6 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs flex gap-3 items-center text-left">
-              <ShieldAlert size={18} className="flex-shrink-0" />
+            <div className="w-full max-w-md p-4 mb-6 rounded-2xl bg-pink-500/10 border border-pink-500/20 text-pink-300 text-xs flex gap-3 items-center text-left">
+              <Sparkles size={18} className="flex-shrink-0 text-pink-400 animate-pulse" />
               <div>
-                <p className="font-bold">Offline/Network Issue</p>
-                <p className="opacity-80">Serving default sister beautiful collage elements safely.</p>
+                <p className="font-bold">Pinku Bahan's Special Album Active 💖</p>
+                <p className="opacity-80">Serving high-resolution, birthday memories safely from the build cache.</p>
               </div>
             </div>
           )}

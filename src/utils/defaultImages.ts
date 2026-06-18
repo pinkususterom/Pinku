@@ -9,7 +9,7 @@ export interface PhotoPlaceholder {
 export const DEFAULT_PHOTOS: PhotoPlaceholder[] = [
   {
     id: 'photo_1',
-    url: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&q=80&w=600',
+    url: 'https://images.unsplash.com/photo-1504437484262-5bff4d32a76d?auto=format&fit=crop&q=80&w=600',
     caption: 'My absolute favorite person! 🌟'
   },
   {
